@@ -1,0 +1,44 @@
+<h1>Report generator</h1>
+<%# CREATING REPORT FORM %>
+<form action="" method="get" class="report-form">
+<%# ASKING FOR START DATE -- DATE FORMAT %>
+  <div class="report-form">
+    <label for="start_date">Start date: </label>
+    <input type="date" name="start_date" id="start_date" required>
+  </div>
+<%# ASKING FOR END DATE -- DATE FORMAT  %>
+    <div class="report-form">
+    <label for="end_date">End date: </label>
+    <input type="date" name="end_date" id="end_date" required>
+  </div>
+<%# ASKING FOR OPERATION TYPE -- RADIOBUTTON %>
+  <div class="report-form">
+    <label for="operation_type">Operation type: </label>
+    <div>
+      <input type="radio" id="operation_type_income" name="operation_type" value="operation_type_income">
+      <label for="operation_type_income">Income</label>
+      <input type="radio" id="operation_type_expenses" name="operation_type" value="operation_type_expenses">
+      <label for="operation_type_expenses">Expenses</label>
+    </div>
+
+  </div>
+<%# ASKING FOR OPERATION CATEGORY -- DROPDOWN MENUE %>
+    <div class="report-form">
+    <label for="category">Category: </label>
+    <select name="category" id="category">
+        <option value="other">Other</option> 
+    </select>
+  </div>
+<%# SUBMIT BUTTON %>
+  <div class="report-form">
+    <input type="submit" value="Generate">
+  <button>
+    Report by category
+  </button>
+  <button>
+    Report by dates
+  </button>
+  </div>
+</form>
+
+
