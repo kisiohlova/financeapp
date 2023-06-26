@@ -5,6 +5,7 @@
 <br>
 
 <div>
-  <%= link_to "Show this operation", @operation %> |
-  <%= link_to "Back to operations", operations_path %>
+  <%= link_to "Show", @operation, class:"btn btn-secondary" %>
+  <%= link_to "Back", operations_path, class:"btn btn-secondary" %>
+  <%= button_to "Destroy", @operation, form: { data: { turbo_confirm: "Are you sure?" } }, method: :delete, class:"btn btn-danger" %>
 </div>

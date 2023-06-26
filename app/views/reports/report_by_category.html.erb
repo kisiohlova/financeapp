@@ -1,2 +1,84 @@
-<h1>Reports#report_by_category</h1>
-<p>Find me in app/views/reports/report_by_category.html.erb</p>
+<div class="container">
+  <div class="chart-container">
+    <canvas id="report_by_category"></canvas>
+  </div>
+
+  <div class="table-container">
+    <table class="table table-striped table-bordered table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Category</th>
+          <th>Spendings</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @labels.each_with_index do |label, index| %>
+          <tr>
+            <td><%= label %></td>
+            <td><%= @data[index] %></td>
+          </tr>
+        <% end %>
+      </tbody>
+      <tfoot class="table-dark">
+        <tr>
+          <td>Total:</td>
+          <td> <%= @data.sum %> </td>
+        </tr> 
+      </tfoot>
+    </table>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<style>
+  .container {
+    display: flex;
+    justify-content: space-around;
+  }
+
+  .chart-container,
+  .table-container {
+    width: 45%;
+  }
+</style>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function() {
+
+    const backgroundColors = ["#DAF7A6", "#FFC300", "#FF5733", "#C70039", "#900C3F", "#581845"];
+
+    function getRandomColor() {
+      const index = Math.floor(Math.random() * backgroundColors.length);
+      const color = backgroundColors[index];
+      backgroundColors.splice(index, 1);
+      return color;
+    }
+
+    function generateBackgroundColorArray(dataLength) {
+      const colors = [];
+      for (let i = 0; i < dataLength; i++) {
+        colors.push(getRandomColor());
+      }
+      return colors;
+    }
+
+    const data = {
+      labels: <%= @labels.to_json.html_safe %>,
+      datasets: [{
+        data: <%= @data.to_json.html_safe %>,
+        backgroundColor: generateBackgroundColorArray(<%= @data.length %>)
+      }]
+    };
+
+    const config = {
+      type: 'doughnut',
+      data: data,
+      options: {
+
+      }
+    };
+
+    const chart = new Chart(document.getElementById('report_by_category'), config);
+  });
+</script>

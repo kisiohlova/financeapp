@@ -1,10 +1,12 @@
-<p style="color: green"><%= notice %></p>
-
-<%= render @operation %>
-
-<div>
-  <%= link_to "Edit this operation", edit_operation_path(@operation) %> |
-  <%= link_to "Back to operations", operations_path %>
-
-  <%= button_to "Destroy this operation", @operation, method: :delete %>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4"><%= @operation.description %></h1>
+    <p class="lead">
+    <%= render @operation %>
+    </p>
+    <br/>
+    <%= link_to "Edit", edit_operation_path(@operation), class:"btn btn-secondary" %>
+    <%= link_to "Back", operations_path, class:"btn btn-secondary" %>
+    <%= button_to "Destroy", @operation, method: :delete, data: { turbo_confirm: "Are you sure?" }, class:"btn btn-danger" %>
+  </div>
 </div>

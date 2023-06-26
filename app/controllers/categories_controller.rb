@@ -1,9 +1,11 @@
 class CategoriesController < ApplicationController
-  before_action :set_category, only: %i[ show edit update destroy ]
+  before_action :set_category, only: %i[show edit update destroy]
 
+  # пошук по категоріям
+  
   # GET /categories or /categories.json
   def index
-    @categories = Category.all
+    @categories = Category.page(params[:page])
   end
 
   # GET /categories/1 or /categories/1.json
@@ -52,19 +54,19 @@ class CategoriesController < ApplicationController
     @category.destroy
 
     respond_to do |format|
-      format.html { redirect_to categories_url, notice: "Category was successfully destroyed." }
+      format.html { redirect_to categories_path, status: :see_other, notice: "Category was successfully deleted." }
       format.json { head :no_content }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.find(params[:id])
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_category
+    @category = Category.find(params[:id])
+  end
 
-    # Only allow a list of trusted parameters through.
-    def category_params
-      params.require(:category).permit(:name, :description)
-    end
+  # Only allow a list of trusted parameters through.
+  def category_params
+    params.require(:category).permit(:name, :description)
+  end
 end

@@ -1,44 +1,17 @@
 <h1>Report generator</h1>
-<%# CREATING REPORT FORM %>
-<form action="" method="get" class="report-form">
-<%# ASKING FOR START DATE -- DATE FORMAT %>
-  <div class="report-form">
-    <label for="start_date">Start date: </label>
-    <input type="date" name="start_date" id="start_date" required>
-  </div>
-<%# ASKING FOR END DATE -- DATE FORMAT  %>
-    <div class="report-form">
-    <label for="end_date">End date: </label>
-    <input type="date" name="end_date" id="end_date" required>
-  </div>
-<%# ASKING FOR OPERATION TYPE -- RADIOBUTTON %>
-  <div class="report-form">
-    <label for="operation_type">Operation type: </label>
-    <div>
-      <input type="radio" id="operation_type_income" name="operation_type" value="operation_type_income">
-      <label for="operation_type_income">Income</label>
-      <input type="radio" id="operation_type_expenses" name="operation_type" value="operation_type_expenses">
-      <label for="operation_type_expenses">Expenses</label>
-    </div>
 
+<form action="report_generator" method="GET">
+  <br/>
+  <div>
+  <input type="date" name="start_date" class="form-control" style="max-width: 410px;">
+  <input type="date" name="end_date" class="form-control" style="max-width: 410px;">
   </div>
-<%# ASKING FOR OPERATION CATEGORY -- DROPDOWN MENUE %>
-    <div class="report-form">
-    <label for="category">Category: </label>
-    <select name="category" id="category">
-        <option value="other">Other</option> 
-    </select>
+  <br/>
+  <div>
+  <select name="category_id" class="form-select" style="max-width: 410px;"> <%= options_for_select(@categories_data) %> </select>
   </div>
-<%# SUBMIT BUTTON %>
-  <div class="report-form">
-    <input type="submit" value="Generate">
-  <button>
-    Report by category
-  </button>
-  <button>
-    Report by dates
-  </button>
-  </div>
+  <br>
+  <input type="submit" name="report_cat_date" value="Generate" class="btn btn-success">
+  <input type="submit" name="report_by_category" value="Report by Categories" class="btn btn-primary">
+  <input type="submit" name="report_by_date" value="Report by Dates" class="btn btn-primary">
 </form>
-
-
