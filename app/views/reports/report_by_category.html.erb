@@ -1,9 +1,11 @@
-<div class="container">
-  <div class="chart-container">
+<h4 style="text-align: center; color: #2E3439">All spendings by Categories for the period: <%= params[:start_date] %> - <%= params[:end_date] %> </h4>
+<br/><br/>
+<div class="container" style="display: flex; justify-content: space-around">
+  <div class="chart-container" style="width: 45%">
     <canvas id="report_by_category"></canvas>
   </div>
-
-  <div class="table-container">
+  
+  <div class="table-container" style="width: 45%">
     <table class="table table-striped table-bordered table-hover">
       <thead class="table-dark">
         <tr>
@@ -30,18 +32,6 @@
 </div>
 
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<style>
-  .container {
-    display: flex;
-    justify-content: space-around;
-  }
-
-  .chart-container,
-  .table-container {
-    width: 45%;
-  }
-</style>
 
 <script>
   document.addEventListener("DOMContentLoaded", function() {

@@ -1,10 +1,11 @@
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-<h4>All spendings for the period: <%= params[:start_date] %> - <%= params[:end_date] %> </h4>
-
-<div>
-  <canvas id="myChart" width="600" height="400"></canvas></canvas>
+<div class="container" style="display: flex; justify-content: space-around">
+  <div class="chart-container" style="width: 60%">
+    <h4 style="text-align: center">All spendings for the period: <%= params[:start_date] %> - <%= params[:end_date] %> </h4>
+    <br/><br/>
+    <canvas id="myChart"></canvas>
+  </div>
 </div>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
   const ctx = document.getElementById('myChart').getContext('2d');
@@ -23,7 +24,7 @@ const config = {
   type: 'line',
   data: data,
   options: {
-    responsive: false
+
   }
 };
 
