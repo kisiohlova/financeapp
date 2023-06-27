@@ -4,6 +4,12 @@ class OperationsController < ApplicationController
   # GET /operations or /operations.json
   def index
     @operations = Operation.page(params[:page])
+    @categories = Category.all.map { |c| [c.name, c.id] }
+
+    if params[:category_id].present?
+      @operations = @operations.where(category_id: params[:category_id])
+    end
+    
   end
 
   # GET /operations/1 or /operations/1.json

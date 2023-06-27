@@ -1,10 +1,18 @@
 <h1>Operations</h1>
-
+  <br/><br/>
+  <div class="dropdown">
+    <%= form_tag operations_path, method: :get do %>
+    <%= select_tag 'category_id', options_for_select(@categories), include_blank: 'Choose Category', class: 'form-select mb-4', onchange: 'this.form.submit();', style: 'width: 200px;' %>
+    <%= submit_tag 'Reset Filter', class: 'btn btn-secondary' %>
+    <% end %>
+  </div>
+  <br/>
   <div id="operations">
   <table class="table table-striped table-bordered table-hover">
     <thead class="table-dark">
       <tr>
         <th>Description</th>
+        <th>Category</th>
         <th>Date</th>
         <th>Amount</th>
       </tr>
@@ -13,6 +21,7 @@
       <% @operations.each do |operation| %>
         <tr>
           <td><%= link_to operation.description, operation %></td>
+          <td><%= operation.category.name %></td>
           <td><%= operation.odate %></td>
           <td><%= operation.amount %></td>
         </tr>
