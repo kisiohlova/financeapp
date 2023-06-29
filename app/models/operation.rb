@@ -5,5 +5,7 @@ class Operation < ApplicationRecord
   validates :odate, presence: true
   validates :description, presence: true
 
+  enum operation_type: { income: 'income', expense: 'expense' }
+
   paginates_per 5
 end

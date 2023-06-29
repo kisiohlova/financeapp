@@ -24,6 +24,16 @@
     <%= form.text_field :description, class:"form-control", placeholder:"Description"  %>
   </div>
 
+  <div>
+  <%= form.label :operation_type %>
+  <br>
+  <%= form.radio_button :operation_type, 'income' %>
+  <%= form.label :operation_type_income, 'Income' %>
+  <%= form.radio_button :operation_type, 'expense' %>
+  <%= form.label :operation_type_expense, 'Expense' %>
+</div>
+
+
   <div class="field form-group">
     <%= form.label :category_id, style: "display: block" %>
     <%= select(:operation, :category_id, options_for_select(@categories)) %>
