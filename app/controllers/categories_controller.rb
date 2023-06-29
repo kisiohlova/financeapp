@@ -1,11 +1,12 @@
 class CategoriesController < ApplicationController
   before_action :set_category, only: %i[show edit update destroy]
-
-  # пошук по категоріям
   
   # GET /categories or /categories.json
   def index
     @categories = Category.page(params[:page])
+    if params[:search].present?
+      @categories = @categories.where("LOWER(name) LIKE ?", "%#{params[:search].downcase}%")
+    end
   end
 
   # GET /categories/1 or /categories/1.json
