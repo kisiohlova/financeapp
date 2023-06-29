@@ -1,4 +1,4 @@
-<h4 style="text-align: center; color: #2E3439">All spendings by Categories for the period: <%= params[:start_date] %> - <%= params[:end_date] %> </h4>
+<h4 style="text-align: center; color: #2E3439">All <%= @op_type %>s by Categories for the period: <%= params[:start_date] %> - <%= params[:end_date] %> </h4>
 <br/><br/>
 <div class="container" style="display: flex; justify-content: space-around">
   <div class="chart-container" style="width: 45%">
@@ -10,7 +10,7 @@
       <thead class="table-dark">
         <tr>
           <th>Category</th>
-          <th>Spendings</th>
+          <th>Amount</th>
         </tr>
       </thead>
       <tbody>

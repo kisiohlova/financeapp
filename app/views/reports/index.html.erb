@@ -3,12 +3,21 @@
 <form action="report_generator" method="GET">
   <br/>
   <div>
-  <input type="date" name="start_date" class="form-control" style="max-width: 410px;">
-  <input type="date" name="end_date" class="form-control" style="max-width: 410px;">
+    <label>Start date</label>
+    <input type="date" name="start_date" class="form-control" style="max-width: 410px;">
+  <br/>
+    <label>End date</label>
+    <input type="date" name="end_date" class="form-control" style="max-width: 410px;">
   </div>
   <br/>
   <div>
-  <select name="category_id" class="form-select" style="max-width: 410px;"> <%= options_for_select(@categories_data) %> </select>
+    <label>Category</label>
+    <select name="category_id" class="form-select" style="max-width: 410px;"> <%= options_for_select(@categories_data) %> </select>
+  </div>
+  <br/>
+  <div>
+    <label>Operation Type</label>
+    <select name="operation_type" class="form-select" style="max-width: 410px;"> <%= options_for_select(@operations_data) %> </select>
   </div>
   <br>
   <input type="submit" name="report_cat_date" value="Generate" class="btn btn-success">

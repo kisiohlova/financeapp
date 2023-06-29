@@ -12,6 +12,7 @@
   <% end %>
 
   <div class="field form-group">
+    <%= form.label "Amount", style: "display: block" %>
     <%= form.text_field :amount, class:"form-control", placeholder:"Amount"  %>
   </div>
 
@@ -21,18 +22,18 @@
   </div>
 
   <div class="field form-group">
+  <%= form.label "Description", style: "display: block" %>
     <%= form.text_field :description, class:"form-control", placeholder:"Description"  %>
   </div>
 
-  <div>
   <%= form.label :operation_type %>
   <br>
-  <%= form.radio_button :operation_type, 'income' %>
-  <%= form.label :operation_type_income, 'Income' %>
-  <%= form.radio_button :operation_type, 'expense' %>
-  <%= form.label :operation_type_expense, 'Expense' %>
-</div>
-
+  <div class="form-check">
+    <%= form.radio_button :operation_type, 'income', class: "form-check-label" %>
+    <%= form.label :operation_type_income, 'Income' %>
+    <%= form.radio_button :operation_type, 'expense', class: "form-check-label" %>
+    <%= form.label :operation_type_expense, 'Expense' %>
+  </div>
 
   <div class="field form-group">
     <%= form.label :category_id, style: "display: block" %>
