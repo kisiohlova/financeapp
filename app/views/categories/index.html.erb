@@ -23,17 +23,9 @@
           <td><%= category.description %></td>
         </tr>
       <% end %>
-      <script>
-      $(document).on("turbolinks:load", function() {
-        $("#category-search-form input").on("input", function() {
-          $(this).closest("form").submit();
-        });
-      });
-    </script>
     </tbody>
   </table>
 </div>
-
 
 <%= link_to "New category", new_category_path, class:"btn btn-secondary" %>
 <br><br><br>
