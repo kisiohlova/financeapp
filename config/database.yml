@@ -23,7 +23,7 @@ test:
 production:
   adapter: postgresql
   encoding: unicode
-  database: d6k80g8f93jcvv
+  database: db/production.postgresql
   host: lingering-waterfall-5903-db.internal
   pool: 5
   username: postgres
