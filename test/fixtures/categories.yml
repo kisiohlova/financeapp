@@ -1,17 +1,17 @@
 # Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-cat_1:
+one:
   name: 1st_Category
   description: 1st_description
 
-cat_2:
+two:
   name: 2nd_Category
   description: 2nd_description
 
-cat_5:
+five:
   name: 5th_Category
   description: 5th_description
 
-cat_6:
+six:
   name: 6th_Category
   description: 6th_description

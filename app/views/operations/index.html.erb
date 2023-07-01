@@ -25,7 +25,7 @@
         <tr>
           <td><%= link_to operation.description, operation %></td>
           <td><%= operation.category.name %></td>
-          <td><%= operation.odate %></td>
+          <td><%= operation.odate.to_date %></td>
           <td><%= operation.amount %></td>
           <td><%= operation.operation_type %></td>
         </tr>

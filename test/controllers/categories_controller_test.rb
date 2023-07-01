@@ -7,8 +7,7 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
 
   test "should get index" do
     get categories_url
-    # assert_equal('index', @controller.action_name)
-    assert_response :success
+    assert_equal('index', @controller.action_name)
   end
 
   test "should get new" do
@@ -17,8 +16,10 @@ class CategoriesControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should create category" do
+    category_name = "Unique Category #{SecureRandom.hex(4)}" # Generate a unique name
+
     assert_difference("Category.count") do
-      post categories_url, params: { category: { description: @category.description, name: @category.name } }
+      post categories_url, params: { category: { description: @category.description, name: category_name } }
     end
 
     assert_redirected_to category_url(Category.last)
