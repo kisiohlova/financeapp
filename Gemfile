@@ -9,9 +9,6 @@ gem "rails", "~> 7.0.4", ">= 7.0.4.3"
 # The original asset pipeline for Rails [https://github.com/rails/sprockets-rails]
 gem "sprockets-rails"
 
-# Use sqlite3 as the database for Active Record
-gem "sqlite3", "~> 1.4"
-
 # Use the Puma web server [https://github.com/puma/puma]
 gem "puma", "~> 5.0"
 
@@ -60,6 +57,8 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
+  # Use sqlite3 as the database for Active Record
+  gem "sqlite3", "~> 1.4"
 
   # Add speed badges [https://github.com/MiniProfiler/rack-mini-profiler]
   # gem "rack-mini-profiler"
@@ -77,6 +76,4 @@ end
 
 gem "dockerfile-rails", ">= 1.5", :group => :development
 
-group :production do
-  gem "pg", "~> 1.5"
-end
+gem "pg", "~> 1.5"

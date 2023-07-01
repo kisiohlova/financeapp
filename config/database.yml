@@ -24,7 +24,7 @@ production:
   adapter: postgresql
   encoding: unicode
   database: db/production.postgresql
-  host: lingering-waterfall-5903-db.internal
+  host: personalfinancemanager-db.internal
   pool: 5
   username: postgres
   password: <%= ENV['FLYIO_DB_PASSWORD'] %>

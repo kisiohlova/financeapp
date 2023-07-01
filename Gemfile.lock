@@ -87,7 +87,7 @@ GEM
     debug (1.4.0)
       irb (>= 1.3.6)
       reline (>= 0.2.7)
-    dockerfile-rails (1.5.0)
+    dockerfile-rails (1.5.1)
       rails
     erubi (1.12.0)
     globalid (1.1.0)
