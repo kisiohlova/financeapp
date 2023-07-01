@@ -1,6 +1,6 @@
 <div class="container" style="display: flex; justify-content: space-around">
   <div class="chart-container" style="width: 60%">
-    <h4 style="text-align: center; color: #2E3439">All <%= @op_type %>s for the period: <%= params[:start_date] %> - <%= params[:end_date] %> </h4>
+    <h4 style="text-align: center; color: #2E3439">All <%= @op_type.capitalize %>s for the period: <%= params[:start_date] %> - <%= params[:end_date] %> </h4>
     <br/><br/>
     <canvas id="myChart"></canvas>
   </div>
