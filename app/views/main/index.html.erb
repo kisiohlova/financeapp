@@ -65,15 +65,15 @@
             <h5 class="custom-well-content"><%= Date.today.to_s %></h5><br/>
             <h6>UAH to USD</h6>
             <p class="custom-well-content">
-              <span class="exchange-rate" id="usd-rate"></span> USD
+              <span class="exchange-rate" id="usd-rate"></span> <small>₴</small>
             </p>
             <h6>UAH to EUR</h6>
             <p class="custom-well-content">
-              <span class="exchange-rate" id="eur-rate"></span> EUR
+              <span class="exchange-rate" id="eur-rate"></span> <small>₴</small>
             </p>
             <h6>UAH to GBP</h6>
             <p class="custom-well-content">
-              <span class="exchange-rate" id="gbp-rate"></span> GBP
+              <span class="exchange-rate" id="gbp-rate"></span> <small>₴</small>
             </p>
           </div>
         </div>
@@ -84,7 +84,7 @@
               <div class="col-sm-7 mb-3">
                 <div class="well custom-well rounded">
                 <p class="custom-well-content inline-operation">
-                  <span><%= link_to operation[0], operation_path(operation[4]) %>: <%= operation[1] %>, <%= operation[2] %>₴, <%= operation[3].to_date.to_s %></span>
+                  <span><%= link_to operation[0], operation_path(operation[4]) %>: <%= operation[1] %>, <%= operation[2] %> <small>₴</small>, <%= operation[3].to_date.to_s %></span>
                 </p>
                 </div>
               </div>
