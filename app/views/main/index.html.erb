@@ -1,2 +1,120 @@
-<h1>Main#index</h1>
-<p>Find me in app/views/main/index.html.erb</p>
+<style>
+  .mb-3 {
+    margin-bottom: 1rem; /* Add margin-bottom for spacing */
+  }
+
+  .custom-well-content {
+    margin: 10px; /* Add margin to the text content */
+  }
+
+  .inline-operation span {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+</style>
+
+<div class="container-fluid">
+  <div class="row content">
+    <div class="col-sm-5">
+      <h3 style="text-align: center">Welcome to FinanceApp!</h3>
+      <br/>
+      <p>
+        Take full control of your personal finances with our powerful and intuitive personal finance Rails app.
+        With FinanceApp, managing your money becomes effortless. Whether you're creating categories, recording 
+        operations, or generating detailed reports, we've got you covered.
+      </p>
+      <p></p><strong><i>Category Management:</i></strong> Organize your expenses and income with ease. Our app 
+      allows you to create and manage custom categories that suit your financial needs. Categorize your 
+      transactions to gain a clear understanding of where your money is going.
+      </p>
+      <p></p><strong><i>Operations and Transactions:</i></strong> Record your financial activities seamlessly. 
+      Add new operations with details such as date, description, amount, and assigned category. Whether it's an 
+      expense or income, our app helps you track and categorize each transaction accurately.
+      </p>
+      <p></p><strong><i>Category Reports:</i></strong> Gain valuable insights into your spending habits. Generate 
+      comprehensive reports based on categories, allowing you to analyze your expenses and income in a categorized 
+      format. Understand where your money is being allocated and make informed decisions.
+      </p>
+      <p></p><strong><i>Date-based Reports:</i></strong> Get a clear picture of your financial progress over time. 
+      Our app enables you to generate reports based on specific dates or date ranges. Analyze your financial data 
+      within a selected timeframe to understand trends and identify areas for improvement.
+      </p>
+      <p></p><strong><i>Reports by Category and Date:</i></strong> Combine category and date filters to get targeted 
+      insights. Dive deeper into your financial data by generating reports that focus on a specific category within 
+      a chosen date range. Identify spending patterns and track your progress more effectively.
+      </p>
+    </div>
+    <div class="col-sm-7">
+      <div class="row">
+        <div class="col-sm-12 mb-3">
+          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+            <h4 class="custom-well-content">Expences</h4>
+            <p class="custom-well-content"><%= @messages['expense'] %></p>
+          </div>
+        </div>
+        <div class="col-sm-12 mb-3">
+          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+            <h4 class="custom-well-content">Incomes</h4>
+            <p class="custom-well-content"><%= @messages['income'] %></p>
+          </div>
+        </div>
+        <div class="col-sm-5 mb-3">
+          <div class="shadow p-3 mb-5 bg-body-tertiary rounded" style="text-align: center">
+            <h4 class="custom-well-content">Exchange Rate</h4>
+            <h5 class="custom-well-content"><%= Date.today.to_s %></h5><br/>
+            <h6>UAH to USD</h6>
+            <p class="custom-well-content">
+              <span class="exchange-rate" id="usd-rate"></span> USD
+            </p>
+            <h6>UAH to EUR</h6>
+            <p class="custom-well-content">
+              <span class="exchange-rate" id="eur-rate"></span> EUR
+            </p>
+            <h6>UAH to GBP</h6>
+            <p class="custom-well-content">
+              <span class="exchange-rate" id="gbp-rate"></span> GBP
+            </p>
+          </div>
+        </div>
+        <div class="col-sm-7 mb-3">
+          <div class="shadow p-3 mb-5 bg-body-tertiary rounded">
+            <h4 class="custom-well-content" style="text-align: center">Recent Operations</h4>
+            <% @last_ops.each do |operation| %>
+              <div class="col-sm-7 mb-3">
+                <div class="well custom-well rounded">
+                <p class="custom-well-content inline-operation">
+                  <span><%= link_to operation[0], operation_path(operation[4]) %>: <%= operation[1] %>, <%= operation[2] %>₴, <%= operation[3].to_date.to_s %></span>
+                </p>
+                </div>
+              </div>
+              <hr>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  // Function to fetch the exchange rates from ExchangeRatesAPI
+  function fetchExchangeRates() {
+    fetch('https://api.exchangerate-api.com/v4/latest/UAH')
+      .then(response => response.json())
+      .then(data => {
+        const rates = data.rates;
+
+        // Update the exchange rate values on the page
+        document.getElementById('usd-rate').innerText = (1 / rates.USD).toFixed(2);
+        document.getElementById('eur-rate').innerText = (1 / rates.EUR).toFixed(2);
+        document.getElementById('gbp-rate').innerText = (1 / rates.GBP).toFixed(2);
+      })
+      .catch(error => {
+        console.log('Error fetching exchange rates:', error);
+      });
+  }
+
+  // Call the fetchExchangeRates function to retrieve and display the rates
+  fetchExchangeRates();
+</script>
