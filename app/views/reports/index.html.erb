@@ -3,11 +3,11 @@
 <form action="report_generator" method="GET">
   <br/>
   <div>
-    <label>Start date</label>
-    <input type="date" name="start_date" class="form-control" style="max-width: 410px;">
+    <label for="start_date">Start date</label>
+    <input type="date" id="start_date" name="start_date" class="form-control" style="max-width: 410px;" required>
   <br/>
-    <label>End date</label>
-    <input type="date" name="end_date" class="form-control" style="max-width: 410px;">
+    <label for="end_date">End date</label>
+    <input type="date" id="end_date" name="end_date" class="form-control" style="max-width: 410px;" required>
   </div>
   <br/>
   <div>
@@ -23,4 +23,25 @@
   <input type="submit" name="report_cat_date" value="Generate" class="btn btn-success">
   <input type="submit" name="report_by_category" value="Report by Categories" class="btn btn-primary">
   <input type="submit" name="report_by_date" value="Report by Dates" class="btn btn-primary">
+
+<script>
+  var startDateField = document.getElementById('start_date');
+  var endDateField = document.getElementById('end_date');
+
+  endDateField.addEventListener('input', function() {
+    validateDateFields();
+  });
+
+  function validateDateFields() {
+    var startDate = new Date(startDateField.value);
+    var endDate = new Date(endDateField.value);
+
+    if (endDate < startDate) {
+      endDateField.setCustomValidity('End date cannot be earlier than the start date');
+    } else {
+      endDateField.setCustomValidity('');
+    }
+  }
+</script>
+
 </form>
