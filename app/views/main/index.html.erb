@@ -44,6 +44,7 @@
       insights. Dive deeper into your financial data by generating reports that focus on a specific category within 
       a chosen date range. Identify spending patterns and track your progress more effectively.
       </p>
+      
     </div>
     <div class="col-sm-7">
       <div class="row">
@@ -84,7 +85,7 @@
               <div class="col-sm-7 mb-3">
                 <div class="well custom-well rounded">
                 <p class="custom-well-content inline-operation">
-                  <span><%= link_to operation[0], operation_path(operation[4]) %>: <%= operation[1] %>, <%= operation[2] %> <small>₴</small>, <%= operation[3].to_date.to_s %></span>
+                  <span><%= link_to operation[0], operation_path(operation[4]) %>: <br> <%= operation[1] %>, <%= operation[2] %> <small>₴</small>, <%= operation[3].to_date.to_s %></span>
                 </p>
                 </div>
               </div>
