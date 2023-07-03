@@ -37,9 +37,9 @@
 
   <div class="field form-group">
     <%= form.label :category_id, style: "display: block" %>
-    <%= select(:operation, :category_id, options_for_select(@categories)) %>
+    <%= select(:operation, :category_id, options_for_select(@categories), class: "form-control") %>
   </div>
-<br>
+  <br>
   <div class="actions">
     <%= form.submit class:"btn btn-secondary" %>
   </div>
