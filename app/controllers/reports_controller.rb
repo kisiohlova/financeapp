@@ -1,6 +1,6 @@
 class ReportsController < ApplicationController
   def index
-    @categories_data = Category.all.map { |c| [c.name, c.id] }
+    @categories_data = Category.all.map { |c| [c.name, c.id] }.unshift(' ')
     @operations_data = Operation.all.map(&:operation_type).uniq
 
     if params[:report_by_date]
@@ -35,6 +35,7 @@ class ReportsController < ApplicationController
                   .group('categories.name')
                   .pluck('categories.name', 'SUM(operations.amount)')
                   .map { |o| o }
+    @empty_result = ops.empty?
     @data = ops.map { |e| e[1] }
     @labels = ops.map { |e| e[0] }
     @op_type = Operation.where('operation_type = :operation_type', { operation_type: params[:operation_type] }).pluck('operation_type').first
@@ -46,6 +47,7 @@ class ReportsController < ApplicationController
                                 .where('operation_type = :operation_type', { operation_type: params[:operation_type] })
                                 .order(odate: :asc)
                                 .pluck(:odate, :amount)
+    @empty_result = operations_data.empty?
     @amount = operations_data.map { |_, amount| amount }
     @dates = operations_data.map { |date, _| date.to_date.to_s }
     @op_type = Operation.where('operation_type = :operation_type', { operation_type: params[:operation_type] }).pluck('operation_type').first
@@ -57,6 +59,7 @@ class ReportsController < ApplicationController
                                     .where('category_id = :category_id', { category_id: params[:category_id] })
                                     .order(odate: :asc)
                                     .map { |o| [o.odate.to_date.to_s, o.amount] }
+    @empty_result = category_by_date_ops.empty?
     @cat_name = Category.where('id = :category_id', { category_id: params[:category_id] }).pluck('name').first
     @cat_date_amount = category_by_date_ops.map { |e| e[1] }
     @cat_dates = category_by_date_ops.map { |e| e[0] }

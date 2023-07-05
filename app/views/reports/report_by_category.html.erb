@@ -1,74 +1,78 @@
-<h4 style="text-align: center; color: #2E3439">All <%= @op_type.capitalize %>s by Categories for the period: <%= params[:start_date] %> - <%= params[:end_date] %> </h4>
-<br/><br/>
-<div class="container" style="display: flex; justify-content: space-around">
-  <div class="chart-container" style="width: 45%">
-    <canvas id="report_by_category"></canvas>
-  </div>
-  
-  <div class="table-container" style="width: 45%">
-    <table class="table table-striped table-bordered table-hover">
-      <thead class="table-dark">
-        <tr>
-          <th>Category</th>
-          <th>Amount</th>
-        </tr>
-      </thead>
-      <tbody>
-        <% @labels.each_with_index do |label, index| %>
+<% if @empty_result %>
+  <h1 style="text-align: center">There are no operations matching the search<h1>
+<% else %>
+  <h4 style="text-align: center; color: #2E3439">All <%= @op_type.capitalize %>s by Categories for the period: <%= params[:start_date] %> - <%= params[:end_date] %> </h4>
+  <br/><br/>
+  <div class="container" style="display: flex; justify-content: space-around">
+    <div class="chart-container" style="width: 45%">
+      <canvas id="report_by_category"></canvas>
+    </div>
+    
+    <div class="table-container" style="width: 45%">
+      <table class="table table-striped table-bordered table-hover">
+        <thead class="table-dark">
           <tr>
-            <td><%= label %></td>
-            <td><%= @data[index] %></td>
+            <th>Category</th>
+            <th>Amount</th>
           </tr>
-        <% end %>
-      </tbody>
-      <tfoot class="table-dark">
-        <tr>
-          <td>Total:</td>
-          <td> <%= @data.sum %> </td>
-        </tr> 
-      </tfoot>
-    </table>
+        </thead>
+        <tbody>
+          <% @labels.each_with_index do |label, index| %>
+            <tr>
+              <td><%= label %></td>
+              <td><%= @data[index] %></td>
+            </tr>
+          <% end %>
+        </tbody>
+        <tfoot class="table-dark">
+          <tr>
+            <td>Total:</td>
+            <td> <%= @data.sum %> </td>
+          </tr> 
+        </tfoot>
+      </table>
+    </div>
   </div>
-</div>
 
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script>
-  document.addEventListener("DOMContentLoaded", function() {
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
 
-    const backgroundColors = ["#DAF7A6", "#FFC300", "#FF5733", "#C70039", "#900C3F", "#581845"];
+      const backgroundColors = ["#DAF7A6", "#FFC300", "#FF5733", "#C70039", "#900C3F", "#581845"];
 
-    function getRandomColor() {
-      const index = Math.floor(Math.random() * backgroundColors.length);
-      const color = backgroundColors[index];
-      backgroundColors.splice(index, 1);
-      return color;
-    }
-
-    function generateBackgroundColorArray(dataLength) {
-      const colors = [];
-      for (let i = 0; i < dataLength; i++) {
-        colors.push(getRandomColor());
+      function getRandomColor() {
+        const index = Math.floor(Math.random() * backgroundColors.length);
+        const color = backgroundColors[index];
+        backgroundColors.splice(index, 1);
+        return color;
       }
-      return colors;
-    }
 
-    const data = {
-      labels: <%= @labels.to_json.html_safe %>,
-      datasets: [{
-        data: <%= @data.to_json.html_safe %>,
-        backgroundColor: generateBackgroundColorArray(<%= @data.length %>)
-      }]
-    };
-
-    const config = {
-      type: 'doughnut',
-      data: data,
-      options: {
-
+      function generateBackgroundColorArray(dataLength) {
+        const colors = [];
+        for (let i = 0; i < dataLength; i++) {
+          colors.push(getRandomColor());
+        }
+        return colors;
       }
-    };
 
-    const chart = new Chart(document.getElementById('report_by_category'), config);
-  });
-</script>
+      const data = {
+        labels: <%= @labels.to_json.html_safe %>,
+        datasets: [{
+          data: <%= @data.to_json.html_safe %>,
+          backgroundColor: generateBackgroundColorArray(<%= @data.length %>)
+        }]
+      };
+
+      const config = {
+        type: 'doughnut',
+        data: data,
+        options: {
+
+        }
+      };
+
+      const chart = new Chart(document.getElementById('report_by_category'), config);
+    });
+  </script>
+<% end %>

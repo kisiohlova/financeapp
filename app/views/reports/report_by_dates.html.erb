@@ -1,32 +1,36 @@
-<div class="container" style="display: flex; justify-content: space-around">
-  <div class="chart-container" style="width: 60%">
-    <h4 style="text-align: center; color: #2E3439">All <%= @op_type.capitalize %>s for the period: <%= params[:start_date] %> - <%= params[:end_date] %> </h4>
-    <br/><br/>
-    <canvas id="myChart"></canvas>
+<% if @empty_result %>
+  <h1 style="text-align: center">There are no operations matching the search<h1>
+<% else %>
+  <div class="container" style="display: flex; justify-content: space-around">
+    <div class="chart-container" style="width: 60%">
+      <h4 style="text-align: center; color: #2E3439">All <%= @op_type.capitalize %>s for the period: <%= params[:start_date] %> - <%= params[:end_date] %> </h4>
+      <br/><br/>
+      <canvas id="myChart"></canvas>
+    </div>
   </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
-<script>
-  const ctx = document.getElementById('myChart').getContext('2d');
-  const data = {
-  labels: <%= raw @dates %>,
-  datasets: [{
-    label: 'Report by dates',
-    data: <%= @amount %>,
-    fill: false,
-    borderColor: '#FFC300',
-    tension: 0.1
-  }]
-};
+  <script>
+    const ctx = document.getElementById('myChart').getContext('2d');
+    const data = {
+    labels: <%= raw @dates %>,
+    datasets: [{
+      label: 'Report by dates',
+      data: <%= @amount %>,
+      fill: false,
+      borderColor: '#FFC300',
+      tension: 0.1
+    }]
+  };
 
-const config = {
-  type: 'line',
-  data: data,
-  options: {
+  const config = {
+    type: 'line',
+    data: data,
+    options: {
 
-  }
-};
+    }
+  };
 
-const myChart = new Chart(ctx, config);
-</script>
+  const myChart = new Chart(ctx, config);
+  </script>
+<% end %>

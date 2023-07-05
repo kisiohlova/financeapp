@@ -1,41 +1,45 @@
-<div class="container" style="display: flex; justify-content: space-around">
-  <div class="chart-container" style="width: 60%">
-      <h4 style="text-align: center; color: #2E3439">All <%= @op_type.capitalize %>s for the category <%= raw @cat_name %> for the period: <%= params[:start_date] %> - <%= params[:end_date] %> </h4>
-      <canvas id="myChart"></canvas>
+<% if @empty_result %>
+  <h1 style="text-align: center">There are no operations matching the search<h1>
+<% else %>
+  <div class="container" style="display: flex; justify-content: space-around">
+    <div class="chart-container" style="width: 60%">
+        <h4 style="text-align: center; color: #2E3439">All <%= @op_type.capitalize %>s for the category <%= raw @cat_name %> for the period: <%= params[:start_date] %> - <%= params[:end_date] %> </h4>
+        <canvas id="myChart"></canvas>
+    </div>
   </div>
-</div>
-<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-<div>
-  <script>
-    document.addEventListener("DOMContentLoaded", function() {
-      const presetColors = ["#DAF7A6", "#FFC300", "#FF5733", "#C70039", "#900C3F", "#581845"];
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <div>
+    <script>
+      document.addEventListener("DOMContentLoaded", function() {
+        const presetColors = ["#DAF7A6", "#FFC300", "#FF5733", "#C70039", "#900C3F", "#581845"];
 
-      function shuffleArray(array) {
-        for (let i = array.length - 1; i > 0; i--) {
-          const j = Math.floor(Math.random() * (i + 1));
-          [array[i], array[j]] = [array[j], array[i]];
+        function shuffleArray(array) {
+          for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+          }
+          return array;
         }
-        return array;
-      }
 
-      const data = {
-        labels: <%= @cat_dates.to_json.html_safe %>,
-        datasets: [{
-          label: 'Amount this day',
-          data: <%= @cat_date_amount.to_json.html_safe %>,
-          backgroundColor: shuffleArray(presetColors).slice(0, <%= @cat_date_amount.length %>)
-        }]
-      };
+        const data = {
+          labels: <%= @cat_dates.to_json.html_safe %>,
+          datasets: [{
+            label: 'Amount this day',
+            data: <%= @cat_date_amount.to_json.html_safe %>,
+            backgroundColor: shuffleArray(presetColors).slice(0, <%= @cat_date_amount.length %>)
+          }]
+        };
 
-      const config = {
-        type: 'bar',
-        data: data,
-        options: {
+        const config = {
+          type: 'bar',
+          data: data,
+          options: {
 
-        }
-      };
+          }
+        };
 
-      const chart = new Chart(document.getElementById('myChart'), config);
-    });
-  </script>
-</div>
+        const chart = new Chart(document.getElementById('myChart'), config);
+      });
+    </script>
+  </div>
+<% end %>
